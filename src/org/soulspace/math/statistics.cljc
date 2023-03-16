@@ -24,7 +24,7 @@
 ; same as avg
 (defn geometric-average
   "Returns the geometric average"
-  [coll]
+  ^double [coll]
   (m/pow (* coll) (- (count coll))))
 
 (def mean
@@ -37,18 +37,18 @@
 
 (defn harmonic-average
   "Returns the harmonic average of the values of the coll."
-  [coll]
+  ^double [coll]
   (reduce + 0 (map #(/ 1 %) coll)))
 
 (defn square-average
   "Returns the square average of the values of the coll."
-  [coll]
+  ^double [coll]
   (m/sqrt (/ (reduce + 0 (map m/sqr coll))
              (count coll))))
 
 (defn cubic-average
   "Returns the cubic average of the values of the coll."
-  [coll]
+  ^double [coll]
   (m/cbrt (/ (reduce + 0 (map m/cube coll))
              (count coll))))
 
@@ -60,7 +60,7 @@
 
 (defn quantile
   "Returns the q quantile"
-  [q coll]
+  ^double [^double q coll]
   (let [x  (* (count coll) q)]
     (if (integer? x)
       (/ (+ (nth coll (- x 1)) (nth coll x))
@@ -69,27 +69,27 @@
 
 (defn median
   "Returns the median / second quartile"
-  [coll]
+  ^double [coll]
   (quantile (/ 1 2) coll))
 
 (defn quartile1
   "Returns the first quartile"
-  [coll]
+  ^double [coll]
   (quantile (/ 1 4) coll))
 
 (defn quartile2
   "Returns the second quartile / median"
-  [coll]
+  ^double [coll]
   (median coll))
 
 (defn quartile3
   "Returns the third quartile"
-  [coll]
+  ^double [coll]
   (quantile (/ 3 4) coll))
 
 (defn variance
   "Returns the biased sample variance (n)"
-  [coll]
+  ^double [coll]
   (let [mu (mean coll)
         n (count coll)]
     (/ (reduce + 0 (map #(m/sqr (- % mu)) coll))
@@ -97,7 +97,7 @@
 
 (defn unbiased-variance
   "Returns the unbiased sample variance (n-1)"
-  [coll]
+  ^double [coll]
   (let [mu (mean coll)
         n (count coll)]
     (/ (reduce + 0 (map #(m/sqr (- % mu)) coll))
@@ -105,7 +105,7 @@
 
 (defn covariance
   "Returns the biased sample covariance (n)"
-  [coll1 coll2]
+  ^double [coll1 coll2]
   (let [mu1 (mean coll1)
         mu2 (mean coll2)
         n (count coll1)]
@@ -114,7 +114,7 @@
 
 (defn unbiased-covariance
   "Returns the unbiased sample covariance (n-1)"
-  [coll1 coll2]
+  ^double [coll1 coll2]
   (let [mu1 (mean coll1)
         mu2 (mean coll2)
         n (count coll1)]
@@ -123,23 +123,23 @@
 
 (defn deviation
   "Returns the biased sample deviation (n)"
-  [coll]
+  ^double [coll]
   (m/sqrt (variance coll)))
 
 (defn unbiased-deviation
   "Returns the unbiased sample deviation (n-1)"
-  [coll]
+  ^double [coll]
   (m/sqrt (unbiased-variance coll)))
 
 (defn correlation-coefficient
   "Returns the correlation coefficient"
-  [coll1 coll2]
+  ^double [coll1 coll2]
   (/ (covariance coll1 coll2)
      (* (deviation coll1) (deviation coll2))))
 
 (defn linear-regression
   "Returns a vector [a b] of the linear regession coefficients for the equation y = ax + b."
-  [coll1 coll2]
+  ^double [coll1 coll2]
   (let [mu1 (mean coll1)
         mu2 (mean coll2)
         a (/ (covariance coll1 coll2) (variance coll1))]
@@ -147,7 +147,7 @@
 
 (defn q-value
   "Multiplies the count of coll with q."
-  [q coll]
+  ^double [^double q coll]
   (* (count coll) q))
 
 ;
@@ -155,15 +155,15 @@
 ;
 (defn- estimated-parameters
   "Calculates the probability and standard deviation for a given test outcome of n out of N."
-  ([[N n]]
+  (^double [[N n]]
    (estimated-parameters N n))
-  ([N n]
+  (^double [N n]
    (let [p (/ n N)]
      [p (m/sqrt (/ (* p (- 1 p)) N))])))
 
 (defn a-b-test-statistic
   "Calculates the statistic for the hypothesis, that p-a and p-b are the same, given the outcomes for test a and b."
-  [N-a n-a N-b n-b]
+  ^double [N-a n-a N-b n-b]
   (let [[p-a sigma-a] (estimated-parameters N-a n-a)
         [p-b sigma-b] (estimated-parameters N-b n-b)]
     (/ (- p-b p-a)

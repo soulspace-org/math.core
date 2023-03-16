@@ -30,82 +30,82 @@
 
 (defn abs
   "Calculates the absolute value of x."
-  [x]
+  ^double [^double x]
   (.abs js/Math x))
 
 (defn sign
   "Calculates the sign of x."
-  [x]
+  ^double [^double x]
   (.signum js/Math x))
 
 (defn floor
   "Calculates x, rounded downwards to the nearest integer."
-  [x]
+  ^double [^double x]
   (.floor js/Math x))
 
 (defn ceil
   "Calculates x, rounded upwards to the nearest integer."
-  [x]
+  ^double [^double x]
   (.ceil js/Math x))
 
 (defn sqrt
   "Calculates the square root of x."
-  [x]
+  ^double [^double x]
   (.sqrt js/Math x))
 
 (defn cbrt
   "Calculates the cubic root of x."
-  [x]
+  ^double [^double x]
   (.cbrt js/Math x))
 
 (defn pow
   "Calculates the value of x to the power of y."
-  [x y]
+  ^double [^double x ^double y]
   (.pow js/Math x y))
 
 (defn exp
   "Calculates the value of E^x."
-  [x]
+  ^double [^double x]
   (.exp js/Math x))
 
 (defn expm1
   "Calulates e to the power of x minus 1."
-  [x]
+  ^double [^double x]
   (.expm1 js/Math x))
 
 (defn log
   "Calculates the natural logarithm (base E) of x."
-  [x]
+  ^double [^double x]
   (.log js/Math x))
 
 (defn log-with-base
   "Calculates the logarithm with base b of x."
-  [b x]
+  ^double [^double b ^double x]
   (/ (log x) (log b)))
 
 (defn log10
   "Calculates the logarithm with base 10 of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (.log10 js/Math x))
 
 (defn alog10
   "Calculates the inverse of the logarithm with base 2 of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (.pow js/Math 10 x))
 
 (defn log2
   "Calculates the logarithm with base 2 of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (.log2 js/Math x))
 
 (defn alog2
   "Calculates the inverse of the logarithm with base 2 of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (.pow js/Math 2 x))
 
 (defn log1p
   "Calculates the natural logarithm of the sum of x and 1."
-  [^double x]
+  ^double [^double x]
   (.log1p js/Math x))
 
 ;;
@@ -113,67 +113,67 @@
 ;;
 (defn sin
   "Calculates the sine of x (x is in radians)."
-  [x]
+  ^double [^double x]
   (.sin js/Math x))
 
 (defn cos
   "Calculates the cosine of x (x is in radians)."
-  [x]
+  ^double [^double x]
   (.cos js/Math x))
 
 (defn tan
   "Calculates the tangens of x (x is in radians)."
-  [x]
+  ^double [^double x]
   (.tan js/Math x))
 
 (defn asin
   "Calculates the arcsine of x (x is in radians)."
-  [x]
+  ^double [^double x]
   (.asin js/Math x))
 
 (defn acos
   "Calculates the arccosine of x (x is in radians)."
-  [x]
+  ^double [^double x]
   (.acos js/Math x))
 
 (defn atan
   "Calculates the arctangent of x as a numeric value between -PI/2 and PI/2 radians."
-  [x]
+  ^double [^double x]
   (.atan js/Math x))
 
 (defn atan2
   "Calculates the arctangent of the quotient of its arguments."
-  [x y]
+  ^double [^double x ^double y]
   (.atan2 js/Math x y))
 
 (defn sinh
   "Calculates the hyperbolic sine of x (x is in radians)."
-  [x]
+  ^double [^double x]
   (.sinh js/Math x))
 
 (defn cosh
   "Calculates the hyperbolic cosine of x (x is in radians)."
-  [x]
+  ^double [^double x]
   (.cosh js/Math x))
 
 (defn tanh
   "Calculates the  hyperbolic tangens of x (x is in radians)."
-  [x]
+  ^double [^double x]
   (.tanh js/Math x))
 
 (defn hypot
   "Calculates the hypothenuse of x and y (Pythagoras)."
-  [x y]
+  ^double [x ^double y]
   (.hypot js/Math x))
 
 (defn rad-to-deg
   "Converts radians to degrees"
-  [rad]
+  ^double [^double rad]
   (* (/ 180 PI) rad))
 
 (defn deg-to-rad
   "Converts degrees to radians"
-  [deg]
+  ^double [^double deg]
   (* deg (/ PI 180)))
 
 
@@ -214,24 +214,25 @@
       (= cnt 0) b
       :default (recur (long (+ a b)) (long a) (long (dec cnt))))))
 
+
 ;;
 ;; special trigonometric functions
 ;;
 (defn hav
   "Calculates the haversine function of the angle a."
-  [x]
+  ^double [^double x]
   (sqr (sin (/ x 2))))
 
 (defn ahav
   "Calculates the arc haversine function of the value v."
-  [x]
+  ^double [^double x]
   (* 2 (asin (sqrt x))))
 
 ;;
 ;; special functions
 ;;
 (defn- tau-erf
-  [x]
+  ^double [^double x]
   (let [t (/ 1
              (+ 1 (* 1/2 (abs x))))]
     (- 1 (* t (exp (+ (* -1 x x)
@@ -248,7 +249,7 @@
 
 (defn erf
   "Calculates the gaussian error function."
-  [x]
+  ^double [^double x]
   (let [z (tau-erf x)]
     (if (>= x 0)
       z
@@ -256,7 +257,7 @@
 
 (defn erfc
   "Calculates the complementary gaussian error function."
-  [x])
+  ^double [^double x])
   ; TODO implement
 
 

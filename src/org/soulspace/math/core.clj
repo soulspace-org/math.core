@@ -47,98 +47,99 @@
 
 (defn sqrt
   "Calculates the square root of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/sqrt x))
 
 (defn cbrt
   "Calculates the cubic root of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/cbrt x))
 
 (defn pow
   "Calculates x raised to the power of y (with java.lang.Math)."
-  [^double x ^double y]
+  ^double [^double x ^double y]
   (Math/pow x y))
 
 (defn exp
   "Calculates the exponential function of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/exp x))
 
 (defn expm1
   "Calulates e to the power of x minus 1."
-  [^double x]
+  ^double [^double x]
   (Math/expm1 x))
 
 (defn log
   "Calculates the natural logarithm (with base e) of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/log x))
 
 (defn log-with-base
   "Calculates the logarithm with base b of x."
-  [^double b ^double x]
+  ^double [^double b ^double x]
   (/ (Math/log x) (Math/log b)))
 
 (defn log10
   "Calculates the logarithm with base 10 of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/log10 x))
 
 (defn alog10
   "Calculates the inverse of the logarithm with base 2 of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/pow 10 x))
 
 (defn log2
   "Calculates the logarithm with base 2 of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (/ (Math/log x) LN2))
 
 (defn alog2
   "Calculates the inverse of the logarithm with base 2 of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/pow 2 x))
 
 (defn log1p
   "Calculates the natural logarithm of the sum of x and 1."
-  [^double x]
+  ^double [^double x]
   (Math/log1p x))
 
 ; Trigonometrical functions
 
 (defn cos
-  [^double x]
+  ^double [^double x]
   "Calculates the cosine of x (with java.lang.Math)."
   (Math/cos x))
 
 (defn sin
   "Calculates the sine of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/sin x))
 
 (defn tan
   "Calculates the tangens of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/tan x))
 
 (defn asin
   "Calculates the arc sine of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/asin x))
 
 (defn acos
   "Calculates the arc cosine of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/acos x))
 
 (defn atan
   "Calculates the arc tangens of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/atan x))
 
-(defn atan2 [a b]
+(defn atan2
   "Calculates the arc tangens of a/b. Returns the result in the correct quadrant."
+  ^double [^double a ^double b]
   (let [r (atan (/ a b))] ; TODO handle b = 0 case
     (cond
       (< b 0) (if (< a 0)
@@ -148,32 +149,32 @@
 
 (defn cosh
   "Calculates the hyperbolic cosine of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/cosh x))
 
 (defn sinh
   "Calculates the hyperbolic sine of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/sinh x))
 
 (defn tanh
   "Calculates the hyperbolic tangens of x (with java.lang.Math)."
-  [^double x]
+  ^double [^double x]
   (Math/tanh x))
 
 (defn hypot
   "Calculates the hypothenuse of x and y (Pythagoras) (with java.lang.Math)."
-  [^double x ^double y]
+  ^double [^double x ^double y]
   (Math/hypot x y))
 
 (defn deg-to-rad
   "Converts degrees to radians (with java.lang.Math)."
-  [^double deg]
+  ^double [^double deg]
   (Math/toRadians deg))
 
 (defn rad-to-deg
   "Converts radians to degrees (with java.lang.Math)."
-  [^double rad]
+  ^double [^double rad]
   (Math/toDegrees rad))
 
 
@@ -199,7 +200,7 @@
 
 (defn factorial
   "Calculates the factorial of x."
-  [^long x]
+  ^long [^long x]
   (loop [curr (long x) fact (long 1)]
     (cond
       (<= curr 0) 0
@@ -208,7 +209,7 @@
 
 (defn fibonacci
   "Calculates the fibonacci number of x."
-  [^long x]
+  ^long [^long x]
   (loop [a (long 1) b (long 0) cnt (long x)]
     (cond
       (= cnt 0) b
@@ -219,19 +220,19 @@
 ;;
 (defn hav
   "Calculates the haversine function of the angle a."
-  [x]
+  ^double [^double x]
   (sqr (sin (/ x 2))))
 
 (defn ahav
   "Calculates the arc haversine function of the value v."
-  [x]
+  ^double [^double x]
   (* 2 (asin (sqrt x))))
 
 ;;
 ;; special functions
 ;;
 (defn- tau-erf
-  [x]
+  ^double [^double x]
   (let [t (/ 1
              (+ 1 (* 1/2 (abs x))))]
     (- 1 (* t (exp (+ (* -1 x x)
@@ -248,7 +249,7 @@
 
 (defn erf
   "Calculates the gaussian error function."
-  [x]
+  ^double [^double x]
   (let [z (tau-erf x)]
     (if (>= x 0)
       z
@@ -256,7 +257,7 @@
 
 (defn erfc
   "Calculates the complementary gaussian error function."
-  [x])
+  ^double [^double x])
   ; TODO implement
 
 

@@ -20,10 +20,10 @@
 ;;;
 (defn circle-circumference
   "Calculates the circumference of the circle with radius r."
-  [r]
+  ^double [^double r]
   (* 2 m/PI r))
 
 (defn circle-area
   "Calculates the area of the circle with radius r."
-  [r]
+  ^double [^double r]
   (* m/PI (m/sqr r)))

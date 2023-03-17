@@ -17,16 +17,16 @@
 (def default-epsilon "Default tolerance (epsilon)." 0.00001)
 (def default-dx "Default step size (delta x)." 0.0000001)
 
-(def PI (.-PI js/Math))
-(def E (.-E js/Math))
-(def LN2 (.-LN2 js/Math))
-(def DOUBLE-PI (* 2 PI))
-(def HALF-PI (/ PI 2))
-;   (def ln10 (.-LN10 js/Math))
-;   (def log2e (.-LOG2E js/Math))
-;   (def log10e (.-LOG10E js/Math))
-;   (def sqrt1-2 (.-SQRT1_2 js/Math))
-;   (def sqrt2 (.-SQRT2 js/Math))
+(def ^:const PI (.-PI js/Math))
+(def ^:const E (.-E js/Math))
+(def ^:const LN2 (.-LN2 js/Math))
+(def ^:const DOUBLE-PI (* 2 PI))
+(def ^:const HALF-PI (/ PI 2))
+;   (def LN10 (.-LN10 js/Math))
+;   (def LOG2E (.-LOG2E js/Math))
+;   (def LOG10E (.-LOG10E js/Math))
+;   (def SQRT1-2 (.-SQRT1_2 js/Math))
+;   (def SQRT2 (.-SQRT2 js/Math))
 
 (defn abs
   "Calculates the absolute value of x."

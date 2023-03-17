@@ -19,11 +19,11 @@
 (def default-epsilon "Default tolerance (epsilon)." 0.00001)
 (def default-dx "Default step size (delta x)." 0.0000001)
 
-(def PI (Math/PI))
-(def E  (Math/E))
-(def LN2 (Math/log 2))
-(def DOUBLE-PI (* 2 PI))
-(def HALF-PI (/ PI 2))
+(def ^:const PI (Math/PI))
+(def ^:const E  (Math/E))
+(def ^:const LN2 (Math/log 2))
+(def ^:const DOUBLE-PI (* 2 PI))
+(def ^:const HALF-PI (/ PI 2))
 
 (defn abs
   "Calculates the absolute of x (with java.lang.Math)."

@@ -42,9 +42,9 @@
   (is (= (covariance [1 2 3 4] [1 2 3 4]) 5/4)))
 
 (deftest linear-regression-test
-  (is (= (linear-regression [1 2 3 4] [2 3 4 5]) [1N 1N]))
-  (is (= (linear-regression [1 2 3 4] [1 2 3 4]) [1N 0N]))
-  (is (= (linear-regression [1 2 3 4] [-1 -2 -3 -4]) [-1N 0N])))
+  (is (= (linear-regression [1 2 3 4] [2 3 4 5]) [1.0 1.0]))
+  (is (= (linear-regression [1 2 3 4] [1 2 3 4]) [1.0 0.0]))
+  (is (= (linear-regression [1 2 3 4] [-1 -2 -3 -4]) [-1.0 0.0])))
 
 (deftest quantile-test
-  (is (= (quantile 1/2 [1 2 3 4 5 6 7 8]))))
+  (is (= (quantile 1/2 [1 2 3 4 5 6 7 8]) 4.5)))

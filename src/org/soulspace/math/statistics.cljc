@@ -21,18 +21,20 @@
 ;;; Statistics functions
 ;;;
 
-; same as avg
-(defn geometric-average
-  "Returns the geometric average"
-  ^double [coll]
-  (m/pow (* coll) (- (count coll))))
-
-(def mean
-  "Returns the mean of the values of the coll."
-  m/avg)
+(comment
+  ; same as m/avg
+  (defn geometric-average
+    "Returns the geometric average"
+    ^double [coll]
+    (m/pow (* coll) (- (count coll))))
+  )
 
 (def geometric-average
   "Returns the geometric average (mean) of the values of the coll."
+  m/avg)
+
+(def mean
+  "Returns the mean of the values of the coll."
   m/avg)
 
 (defn harmonic-average
@@ -60,7 +62,7 @@
 
 (defn quantile
   "Returns the q quantile"
-  ^double [^double q coll]
+  ^double [q coll]
   (let [x  (* (count coll) q)]
     (if (integer? x)
       (/ (+ (nth coll (- x 1)) (nth coll x))
@@ -105,7 +107,7 @@
 
 (defn covariance
   "Returns the biased sample covariance (n)"
-  ^double [coll1 coll2]
+  [coll1 coll2]
   (let [mu1 (mean coll1)
         mu2 (mean coll2)
         n (count coll1)]
@@ -114,7 +116,7 @@
 
 (defn unbiased-covariance
   "Returns the unbiased sample covariance (n-1)"
-  ^double [coll1 coll2]
+  [coll1 coll2]
   (let [mu1 (mean coll1)
         mu2 (mean coll2)
         n (count coll1)]
@@ -139,7 +141,7 @@
 
 (defn linear-regression
   "Returns a vector [a b] of the linear regession coefficients for the equation y = ax + b."
-  ^double [coll1 coll2]
+  [coll1 coll2]
   (let [mu1 (mean coll1)
         mu2 (mean coll2)
         a (/ (covariance coll1 coll2) (variance coll1))]
@@ -155,9 +157,9 @@
 ;
 (defn- estimated-parameters
   "Calculates the probability and standard deviation for a given test outcome of n out of N."
-  (^double [[N n]]
+  ([[N n]]
    (estimated-parameters N n))
-  (^double [N n]
+  ([N n]
    (let [p (/ n N)]
      [p (m/sqrt (/ (* p (- 1 p)) N))])))
 

@@ -12,4 +12,5 @@
 ;  :dependencies [[org.clojure/clojure "1.11.1"]]
 
   :test-paths ["test"]
+  :scm {:name "git" :url "https://github.com/soulspace-org/math.core"}
   :deploy-repositories [["clojars" {:sign-releases false :url "https://clojars.org/repo"}]])

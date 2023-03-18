@@ -4,7 +4,7 @@
  :type :library
  :version "0.8.0"
  :description "The math.base library contains mathematical functions and algorithms."
- :scm-url "https://github.com/lsolbach/CljMath"
+ :scm-url "https://github.com/soulspace-org/math.core"
  :plugins [["org.soulspace.baumeister/ClojurePlugin"]
            ["org.soulspace.baumeister/ClojureTestPlugin"]
            ["org.soulspace.baumeister/PackagePlugin"]]

@@ -21,5 +21,5 @@ License
 
 Code Repository
 ---------------
-[CljMath on GitHub](https://github.com/soulspace-org/math.core)
+[math.core on GitHub](https://github.com/soulspace-org/math.core)
 

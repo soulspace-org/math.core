@@ -9,6 +9,7 @@
 ;;;;
 ;;;;   You must not remove this notice, or any other, from this software.
 ;;;;
+
 (ns org.soulspace.math.quaternion
   (:require [org.soulspace.math.core :as m]))
 

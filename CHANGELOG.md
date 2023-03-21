@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+Version 0.8.1
+-------------
+* fixed a reference to PI in probability
+* removed abs function from math core in favor of clojure.core version
+
 Version 0.8.0
 -------------
 * added Clojurescript implementation of core

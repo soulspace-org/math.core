@@ -12,7 +12,6 @@
 
 (ns org.soulspace.math.gradient
   (:require [org.soulspace.math.core :as m]
-            [org.soulspace.math.matrix :as mm]
             [org.soulspace.math.vector :as mv]))
 
 #?(:clj
@@ -33,7 +32,7 @@
          Double/POSITIVE_INFINITY))
     #?(:cljs
        (catch js/Error e
-        Double/POSITIVE_INFINITY))
+        js/Infinity))
     ))
 
 (defn safe-fn
@@ -47,7 +46,7 @@
            Double/POSITIVE_INFINITY))
       #?(:cljs
          (catch js/Error e
-           Double/POSITIVE_INFINITY)))))
+           js/Infinity)))))
 
 (defn partial-difference-quotient
   "Calculates the i-th partial difference quotient of f at v."
@@ -111,9 +110,10 @@
   "Calculates ."
   ([target-fn gradient-fn x y theta-0]
    (minimize-stochastic target-fn gradient-fn x y theta-0 0.01))
-  ([target-fn gradient-fn x y theta-0 alpha-0]))
+  ([target-fn gradient-fn x y theta-0 alpha-0])
     ; TODO implement
     ; use (shuffle coll)
+  )
 
 (defn maximize-stochastic
   "Calculates ."

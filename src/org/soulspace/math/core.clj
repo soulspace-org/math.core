@@ -10,7 +10,9 @@
 ;;;;   You must not remove this notice, or any other, from this software.
 ;;;;
 
-(ns org.soulspace.math.core)
+(ns org.soulspace.math.core
+  ;(:refer-clojure :exclude [abs])
+  )
 
 ;;;
 ;;; Java Math implementations for Clojure
@@ -26,10 +28,13 @@
 (def ^:const DOUBLE-PI (* 2 PI))
 (def ^:const HALF-PI (/ PI 2))
 
-(defn abs
-  "Calculates the absolute of x (with java.lang.Math)."
-  ^double [^double x]
-  (Math/abs x))
+(comment
+  ; use clojure.core/abs 
+  (defn abs
+    "Calculates the absolute of x (with java.lang.Math)."
+    ^double [^double x]
+    (Math/abs x))
+  )
 
 (defn sign
   "Calculates the sign of x (with java.lang.Math)."

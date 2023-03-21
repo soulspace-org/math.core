@@ -64,7 +64,7 @@
   (^double [^double x ^double mu ^double sigma]
    (/ (m/exp (* -1 (/ (m/sqr (- x mu))
                     (* 2 sigma sigma))))
-      (m/sqrt (* 2 m/pi)))))
+      (m/sqrt (* 2 m/PI)))))
 
 (defn normal-cdf
   "Calculates the cumulative distribution function for the normal distribution."

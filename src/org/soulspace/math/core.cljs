@@ -29,10 +29,13 @@
 ;   (def SQRT1-2 (.-SQRT1_2 js/Math))
 ;   (def SQRT2 (.-SQRT2 js/Math))
 
-(defn abs
-  "Calculates the absolute value of x."
-  ^double [^double x]
-  (.abs js/Math x))
+(comment
+  ; use cljs.core/abs
+  (defn abs
+    "Calculates the absolute value of x."
+    ^double [^double x]
+    (.abs js/Math x))
+  )
 
 (defn sign
   "Calculates the sign of x."

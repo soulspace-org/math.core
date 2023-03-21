@@ -95,7 +95,7 @@
              next-thetas (map #(step theta gradient (* -1 %)) step-sizes)
              next-theta (apply min-key target-fn next-thetas)
              next-value (target-fn next-theta)]
-         (if (< (m/abs (- value next-value)) tolerance)
+         (if (< (abs (- value next-value)) tolerance)
            theta
            (recur next-theta next-value)))))))
 

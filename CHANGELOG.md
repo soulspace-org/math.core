@@ -1,6 +1,10 @@
 ChangeLog
 =========
 
+Version 0.8.2
+-------------
+* removed namespace prefix from abs in gradient
+
 Version 0.8.1
 -------------
 * fixed a reference to PI in probability

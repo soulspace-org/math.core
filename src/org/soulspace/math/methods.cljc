@@ -61,7 +61,7 @@
   ([x y]
    (close-enough? x y m/default-epsilon))
   ([x y epsilon]
-   (< (m/abs (- x y)) epsilon)))
+   (< (abs (- x y)) epsilon)))
 
 (defn average-damp
   "Returns a function with average dampening for the given function."

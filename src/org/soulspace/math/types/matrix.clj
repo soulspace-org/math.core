@@ -24,9 +24,9 @@
   (column-vector [this j] "Returns the column vector of 'this' matrix at column 'j'.")
   (upper-triangular [this] "Returns the upper triangular of 'this' matrix.")
   (lower-triangular [this] "Returns the upper triangular of 'this' matrix.")
-  (scalar-sum [this x] "Calculates the scalar sum of 'this' matrix with the scalar 'x'.")
+  (scalar-add [this x] "Calculates the scalar sum of 'this' matrix with the scalar 'x'.")
   (scalar-product [this x] "Calculates the scalar product of 'this' matrix with the scalar 'x'.")
-  (matrix-sum [this m2] "Calculates the sum of 'this' matrix with the matrix 'm2'.")
+  (matrix-add [this m2] "Calculates the sum of 'this' matrix with the matrix 'm2'.")
   (matrix-product [this m2] "Calculates the matrix product of 'this' matrix with matrix 'm2'.")
   (transpose [this] "Returns the transposed matrix of this matrix.")
   (solve [this v] "Calculates the solution of the linear equations of 'this' matrix with the vector 'v'."))
@@ -45,12 +45,12 @@
     (mm/upper-triangular this))
   (lower-triangular [this]
     (mm/lower-triangular this))
-  (scalar-sum [this x]
-    (mm/scalar-sum this x))
+  (scalar-add [this x]
+    (mm/scalar-add this x))
   (scalar-product [this x]
     (mm/scalar-product this x))
-  (matrix-sum [this m2]
-    (mm/matrix-sum this m2))
+  (matrix-add [this m2]
+    (mm/matrix-add this m2))
   (matrix-product [this m2]
     (mm/matrix-product this m2))
   (transpose [this]

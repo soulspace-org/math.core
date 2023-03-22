@@ -95,7 +95,7 @@
     (throw (ex-info "The matrices are not of the same shape." {:shape-m (shape m)
                                                                :shape-n (shape n)}))))
 
-(defn matrix-substract
+(defn matrix-difference
   "Substracts the matrices m and n."
   [m n]
   (if (= (shape m) (shape n))
@@ -106,7 +106,7 @@
 (defn matrix-sum
   "Adds the matrices."
   [& ms]
-  (reduce matrix-add ms))
+  (reduce matrix-sum ms))
 
 (defn matrix-product
   [m n]

@@ -10,18 +10,10 @@
 ;;;;   You must not remove this notice, or any other, from this software.
 ;;;;
 
-(ns org.soulspace.math.test.geometry
+(ns org.soulspace.math.types.test.vector
   (:require [clojure.test :refer :all]
-            [org.soulspace.math.core :as m]
-            [org.soulspace.math.geometry :as mg]))
+            [org.soulspace.math.types.vector :refer :all]))
 
-(deftest circle-circumference-test
-  (is (= (mg/circle-circumference 0) 0.0))
-  (is (= (mg/circle-circumference 1) m/DOUBLE-PI))
-  (is (= (mg/circle-circumference 2) (* 4 m/PI))))
-
-(deftest circle-area-test
-  (is (= (mg/circle-area 0) 0.0))
-  (is (= (mg/circle-area 1) m/PI))
-  (is (= (mg/circle-area 2) (* 4 m/PI))))
-
+(deftest compile-test
+  (testing "Compile test"
+    (is (= 2 (+ 1 1)))))

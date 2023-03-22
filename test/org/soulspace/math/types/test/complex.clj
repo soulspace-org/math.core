@@ -9,11 +9,16 @@
 ;;;;
 ;;;;   You must not remove this notice, or any other, from this software.
 ;;;;
+
 (ns org.soulspace.math.types.test.complex
   (:require [clojure.test :refer :all]
             [org.soulspace.math.types.complex :as c]))
   ;(:import [org.soulspace.math.complex DoublePolarComplexImpl DoubleComplexImpl])
 
+
+(deftest compile-test
+  (testing "Compile test"
+    (is (= 2 (+ 1 1)))))
 
 (deftest complex-test)
 

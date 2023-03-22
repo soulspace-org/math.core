@@ -96,4 +96,3 @@
   If q is zero, an exeption is thrown."
   [q]
   (scalar-product (conjugate q) (/ 1 (norm q))))
-

@@ -12,8 +12,7 @@
 
 (ns org.soulspace.math.statistics
   (:require [org.soulspace.math.core :as m]
-            [org.soulspace.math.matrix :as mm]
-            [org.soulspace.math.vector :as mv]))
+            [org.soulspace.math.matrix :as mm]))
 
 #?(:clj
    (set! *warn-on-reflection* true))

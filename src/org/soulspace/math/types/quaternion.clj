@@ -12,13 +12,13 @@
 
 (ns org.soulspace.math.types.quaternion
   (:require [org.soulspace.math.core :as m]
-            [org.soulspace.math.quarternion :as mq]))
+            [org.soulspace.math.quaternion :as q]))
 
 ;;;
 ;;; Protocols and Implementations for Quaternion Numbers
 ;;;
 
-(declare quaternion)
+(declare create-quaternion)
 
 (defprotocol IQuaternion
   "Protocol for Quaternions, also known as Hamilton numbers, hyper complex numbers of 4th dimension."
@@ -30,24 +30,24 @@
   (norm [this] "Returns the norm of 'this' quaternion."))
 
 (defrecord Quaternion
-  [r i j k]
+           [r i j k]
   IQuaternion
   (add [this q2]
-    (quaternion (mq/add this q2)))
+    (create-quaternion (add this q2)))
   (substract [this q2]
-    (quaternion (mq/add this q2)))
+    (create-quaternion (add this q2)))
   (multiply [this q2]
-    (quaternion (mq/mult this q2)))
+    (create-quaternion (multiply this q2)))
   (scalar-product [this x]
-    (quaternion (mq/scalar-product this x)))
+    (create-quaternion (scalar-product this x)))
   (conjugate [this]
-    (quaternion (mq/conjugate this)))
+    (create-quaternion (conjugate this)))
   (norm [this]
-    (mq/norm this)))
+    (norm this)))
 
-(defn quaternion
+(defn create-quaternion
   "Creates a new quarternion from the quaternion map 'q' or the real numbers 'r', 'i', 'j' and 'k'."
   ([q]
-    (map->Quaternion q))
+   (map->Quaternion q))
   ([r i j k]
-    (->Quaternion r i j k)))
+   (->Quaternion r i j k)))

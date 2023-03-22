@@ -1,6 +1,15 @@
 ChangeLog
 =========
 
+Version 0.9.0
+-------------
+* added compilation test for every namespace
+* added tests for matrix functions
+
+Version 0.8.3
+-------------
+* removed namespace prefix from abs in methods
+
 Version 0.8.2
 -------------
 * removed namespace prefix from abs in gradient

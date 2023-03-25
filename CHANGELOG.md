@@ -1,6 +1,10 @@
 ChangeLog
 =========
 
+Version 0.9.1
+-------------
+* added diagonal function to geometry namespace
+
 Version 0.9.0
 -------------
 * added compilation test for every namespace

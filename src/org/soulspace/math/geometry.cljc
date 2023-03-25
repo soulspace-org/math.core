@@ -28,3 +28,11 @@
   "Calculates the area of the circle with radius r."
   ^double [^double r]
   (* m/PI (m/sqr r)))
+
+(defn diagonal
+  "Calculates the diagonal of a rectangle."
+  ([a]
+   (m/sqrt (* 2 a a)))
+  ([a b]
+   (m/sqrt (+ (* a a) (* b b)))))
+

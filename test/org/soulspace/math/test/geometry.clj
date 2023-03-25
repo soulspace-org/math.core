@@ -16,12 +16,22 @@
             [org.soulspace.math.geometry :as mg]))
 
 (deftest circle-circumference-test
-  (is (= (mg/circle-circumference 0) 0.0))
-  (is (= (mg/circle-circumference 1) m/DOUBLE-PI))
-  (is (= (mg/circle-circumference 2) (* 4 m/PI))))
+  (testing "Testing circle-circumference"
+    (is (= 0.0         (mg/circle-circumference 0)))
+    (is (= m/PI        (mg/circle-circumference 0.5)))
+    (is (= m/DOUBLE-PI (mg/circle-circumference 1)))
+    (is (= (* 4 m/PI)  (mg/circle-circumference 2)))
+    (is (= (* 8 m/PI)  (mg/circle-circumference 4)))))
 
 (deftest circle-area-test
-  (is (= (mg/circle-area 0) 0.0))
-  (is (= (mg/circle-area 1) m/PI))
-  (is (= (mg/circle-area 2) (* 4 m/PI))))
+  (testing "Testing circle-area"
+    (is (= 0.0            (mg/circle-area 0)))
+    (is (= (* m/PI 0.25)  (mg/circle-area 0.5)))
+    (is (= m/PI           (mg/circle-area 1)))
+    (is (= (* 4 m/PI)     (mg/circle-area 2)))
+    (is (= (* 16 m/PI)    (mg/circle-area 4)))))
 
+(deftest diagonal-test
+  (testing "Testing diagonal"
+    (is (= 0.0 (mg/diagonal 0)))
+    (is (= 5.0 (mg/diagonal 3 4)))))

@@ -31,8 +31,8 @@
 
 (defn diagonal
   "Calculates the diagonal of a rectangle."
-  ([a]
+  (^double [a]
    (m/sqrt (* 2 a a)))
-  ([a b]
+  (^double [a b]
    (m/sqrt (+ (* a a) (* b b)))))
 

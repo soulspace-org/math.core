@@ -19,6 +19,7 @@
 ;;;
 ;;; Geometric functions
 ;;;
+
 (defn circle-circumference
   "Calculates the circumference of the circle with radius r."
   ^double [^double r]
@@ -29,10 +30,24 @@
   ^double [^double r]
   (* m/PI (m/sqr r)))
 
+(defn rectangle-area
+  "Calculates the area of the rectangle with width `w` and height `h`."
+  (^double [^double w]
+   (* w w))
+  (^double [^double w ^double h]
+   (* w h)))
+
+(defn rectangle-circumference
+  "Calculates the circumference of the rectangle with width `w` and height `h`."
+  (^double [^double w]
+   (* 4 w))
+  (^double [^double w ^double h]
+   (* 2 (+ w h))))
+
 (defn diagonal
   "Calculates the diagonal of a rectangle."
-  (^double [a]
-   (m/sqrt (* 2 a a)))
-  (^double [a b]
-   (m/sqrt (+ (* a a) (* b b)))))
+  (^double [^double w]
+   (m/sqrt (* 2 w w)))
+  (^double [^double w ^double h]
+   (m/sqrt (+ (* w w) (* h h)))))
 

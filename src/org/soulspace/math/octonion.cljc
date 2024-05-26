@@ -11,11 +11,9 @@
 ;;;;
 
 (ns org.soulspace.math.octonion
-  (:require [org.soulspace.math.core :as m]
+  (:require [clojure.math :as m]
+            [org.soulspace.math.core :as mc]
             [org.soulspace.math.quaternion :as mq]))
-
-#?(:clj
-   (set! *warn-on-reflection* true))
 
 ;;;
 ;;; Octonions, hyper complex numbers of the 8th dimension
@@ -23,7 +21,7 @@
 ;;; (see Octonion on wikipedia.org)
 ;;;
 (defn add
-  "Calculates the addition of the octonion numbers 'o1' and 'o2'."
+  "Calculates the addition of the octonion numbers `o1` and `o2`."
   [o1 o2]
   {:r (+ (:r o1) (:r o2))
    :i (+ (:i o1) (:i o2))
@@ -35,7 +33,7 @@
    :o (+ (:o o1) (:o o2))})
 
 (defn substract
-  "Calculates the substraction of the octonion numbers 'o1' with 'o2'."
+  "Calculates the substraction of the octonion numbers `o1` with `o2`."
   [o1 o2]
   {:r (- (:r o1) (:r o2))
    :i (- (:i o1) (:i o2))
@@ -47,8 +45,8 @@
    :o (- (:o o1) (:o o2))})
 
 (defn multiply
-  "Calculates the multiplication of the octonion numbers 'o1' with 'o2'
-  via the Cayley–Dickson construction."
+  "Calculates the multiplication of the octonion numbers `o1` with `o2`
+  via the Cayley-Dickson construction."
   [o1 o2]
   (let [a {:r (:r o1) :i (:i o1) :j (:j o1) :k (:k o1)}
         b {:r (:l o1) :i (:m o1) :j (:n o1) :k (:o o1)}
@@ -68,7 +66,7 @@
      :o (:k q2)}))
 
 (defn scalar-product
-  "Calculates the scalar product of the octonion 'o' with the real number 'x'"
+  "Calculates the scalar product of the octonion `o` with the real number `x`"
   [o x]
   {:r (* x (:r o))
    :i (* x (:i o))
@@ -80,7 +78,7 @@
    :o (* x (:o o))})
 
 (defn conjugate
-  "Calculates the conjugate o* of the octonion number 'o'."
+  "Calculates the conjugate o* of the octonion number `o`."
   [o]
   {:r (:r o)
    :i (* -1 (:i o))
@@ -92,13 +90,12 @@
    :o (* -1 (:o o))})
 
 (defn norm
-  "Calculates the norm ||o|| of the octonion number 'o'."
+  "Calculates the norm ||o|| of the octonion number `o`."
   [o]
-  (m/sqrt (+ (m/sqr (:r o)) (m/sqr (:i o)) (m/sqr (:j o)) (m/sqr (:k o))
-             (m/sqr (:l o)) (m/sqr (:m o)) (m/sqr (:n o)) (m/sqr (:o o)))))
+  (m/sqrt (+ (mc/sqr (:r o)) (mc/sqr (:i o)) (mc/sqr (:j o)) (mc/sqr (:k o))
+             (mc/sqr (:l o)) (mc/sqr (:m o)) (mc/sqr (:n o)) (mc/sqr (:o o)))))
 
 (defn inverse
-  "Calculates the inverse of the octonian number 'o'."
+  "Calculates the inverse of the octonian number `o`."
   [o]
-  (scalar-product (conjugate o) (/ 1 (m/sqr (norm o)))))
-
+  (scalar-product (conjugate o) (/ 1 (mc/sqr (norm o)))))

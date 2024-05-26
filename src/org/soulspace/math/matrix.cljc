@@ -12,50 +12,47 @@
 
 (ns org.soulspace.math.matrix)
 
-#?(:clj
-   (set! *warn-on-reflection* true))
 
 ;;;
 ;;; Matrix functions
 ;;;
-
 (defn rows
-  "Returns the number of rows of the matrix m."
+  "Returns the number of rows of the matrix `m`."
   [m]
   (count m))
 
 (defn columns
-  "Returns the number of columns of the matrix m."
+  "Returns the number of columns of the matrix `m`."
   [m]
   (count (m 0)))
 
 (defn shape
-  "Returns the shape of the matrix as a vector of the number of rows and columns."
+  "Returns the shape of the matrix `m` as a vector of the number of rows and columns."
   [m]
   [(count m) (count (m 0))])
 
 (defn element
-  "Returns the element of the matrix m at row i and column j."
+  "Returns the element of the matrix `m` at row `i` and column `j`."
   [m i j]
   (nth (nth m i) j))
 
 (defn row-vector
-  "Returns the row vector of the matrix m at row i."
+  "Returns the row vector of the matrix `m` at row `i`."
   [m i]
   (nth m i))
 
 (defn column-vector
-  "Returns the column vector of the matrix m at column j."
+  "Returns the column vector of the matrix `m` at column `j`."
   [m j]
   (mapv #(nth % j) m))
 
 (defn transpose
-  "Returns the transposed matrix of the matrix m."
+  "Returns the transposed matrix of the matrix `m`."
   [m]
   (mapv #(column-vector m %) (range (columns m))))
 
 (def column-vectors
-  "Returns the column vectors of the matrix m."
+  "Returns the column vectors of the matrix `m`."
   transpose)
 
 (defn diagonal
@@ -66,29 +63,29 @@
     0))
 
 (defn build-matrix
-  "Builds a new matrix of shape rows x cols with the value m[i, j] is f(i, j)."
+  "Builds a new matrix of shape `rows` x `cols` with function `f` so that the value m[i, j] is f(i, j)."
   [rows cols f]
   (vec (for [i (range rows)]
          (vec (for [j (range cols)]
                 (f i j))))))
 
 (defn identity-matrix
-  "Builds an identity matrix of shape n x n."
+  "Builds an identity matrix of shape `n` x `n`."
   [n]
   (build-matrix n n diagonal))
 
 (defn scalar-add
-  "Adds the scalar s to the matrix m."
+  "Adds the scalar `s` to the matrix `m`."
   [s m]
   (mapv (partial mapv (partial + s)) m))
 
 (defn scalar-product
-  "Multiplies the scalar s to the matrix m."
+  "Multiplies the scalar `s` to the matrix `m`."
   [s m]
   (mapv (partial mapv (partial * s)) m))
 
 (defn matrix-add
-  "Adds the matrices m and n."
+  "Adds the matrices `m` and `n`."
   [m n]
   (if (= (shape m) (shape n))
     (mapv (partial mapv +) m n)
@@ -96,7 +93,7 @@
                                                                :shape-n (shape n)}))))
 
 (defn matrix-difference
-  "Substracts the matrices m and n."
+  "Substracts the matrices `m` and `n`."
   [m n]
   (if (= (shape m) (shape n))
     (mapv (partial mapv -) m n)
@@ -109,6 +106,7 @@
   (reduce matrix-sum ms))
 
 (defn matrix-product
+  "Matrix product of `m` and `n`."
   [m n]
   (if (= (columns m) (rows n))
     (vec (for [i (range (rows m))]
@@ -121,7 +119,7 @@
 
 ; TODO check if this should be compliant to an L-R Zerlegung
 (defn upper-triangular
-  "Returns the upper triangular matrix of the matrix m."
+  "Returns the upper triangular matrix of the matrix `m`."
   [m]
   (vec (for [i (range (rows m))]
          (vec (for [j (range (columns m))]
@@ -131,7 +129,7 @@
 
 ; TODO check if this should be compliant to an L-R Zerlegung
 (defn lower-triangular
-  "Returns the lower triangular matrix of the matrix m."
+  "Returns the lower triangular matrix of the matrix `m`."
   [m]
   (vec (for [i (range (rows m))]
          (vec (for [j (range (columns m))]

@@ -15,7 +15,8 @@
 
   Complex numbers are represented as maps with the keys ':real' and ':img'
   in cartesian representation and ':r' and ':phi' in polar representation."
-  (:require [org.soulspace.math.core :as m]))
+  (:require [clojure.math :as m]
+            [org.soulspace.math.core :as mc]))
 
 ;;
 ;; Complex numbers
@@ -36,7 +37,7 @@
 ;;
 
 (defn to-polar
-  "Retuns the polar representation of the complex number 'c' given in cartesian representation."
+  "Retuns the polar representation of the complex number `c` given in cartesian representation."
   [c]
   (cond
     (and (== (:real c) 0)
@@ -44,13 +45,13 @@
                            :phi 0}
     (== (:real c) 0)      {:r   (:img c)
                            :phi (if (< (:img c) 0) (/ m/PI 2) (/ (* 3 m/PI) 2))}
-    (< (:real c) 0)       {:r   (m/sqrt (+ (m/sqr (:real c)) (m/sqr (:img c))))
+    (< (:real c) 0)       {:r   (m/sqrt (+ (mc/sqr (:real c)) (mc/sqr (:img c))))
                            :phi (+ m/PI (m/atan (/ (:img c) (:real c))))}
-    :default              {:r   (m/sqrt (+ (m/sqr (:real c)) (m/sqr (:img c))))
+    :default              {:r   (m/sqrt (+ (mc/sqr (:real c)) (mc/sqr (:img c))))
                            :phi (m/atan (/ (:img c) (:real c)))}))
 
 (defn to-cartesian
-  "Retuns the cartesian representation of the complex number 'p' given in polar representation."
+  "Retuns the cartesian representation of the complex number `p` given in polar representation."
   [p]
   {:real (* (:r p) (m/cos (:phi p)))
    :img  (* (:r p) (m/sin (:phi p)))})
@@ -60,19 +61,19 @@
 ;;
 
 (defn mult-polar
-  "Multiplies the complex numbers given in polar representation."
+  "Multiplies the complex numbers `p1` and `p2` given in polar representation."
   [p1 p2]
   {:r (* (:r p1) (:r p2))
    :phi (+ (:phi p1) (:phi p2))})
 
 (defn div-polar
-  "Divides the complex numbers given in polar representation."
+  "Divides the complex numbers `p1` and `p2` given in polar representation."
   [p1 p2]
   {:r (/ (:r p1) (:r p2))
    :phi (- (:phi p1) (:phi p2))})
 
 (defn sqrt-polar
-  "Calculates the principal square root of the complex number 'p' given in polar representation."
+  "Calculates the principal square root of the complex number `p` given in polar representation."
   [p]
   (let [sqrt-r (m/sqrt (:r p))]
     {:r   (* sqrt-r (m/cos (/ (:phi p) 2)))
@@ -83,60 +84,60 @@
 ;;
 
 (defn add
-  "Adds two complex numbers 'c1' and 'c2' given in cartesian representation."
+  "Adds two complex numbers `c1` and `c2` given in cartesian representation."
   [c1 c2]
   {:real (+ (:real c1) (:real c2))
    :img  (+ (:img c1) (:img c2))})
 
 (defn substract
-  "Substracts two complex numbers 'c1' and 'c2' given in cartesian representation'."
+  "Substracts two complex numbers `c1` and `c2` given in cartesian representation'."
   [c1 c2]
   {:real (- (:real c1) (:real c2))
    :img  (- (:img c1) (:img c2))})
 
 (defn multiply
-  "Multiplies two complex numbers 'c1' and 'c2' given in cartesian representation."
+  "Multiplies two complex numbers `c1` and `c2` given in cartesian representation."
   [c1 c2]
   {:real (- (* (:real c1) (:real c2)) (* (:img c1) (:img c2)))
    :img  (+ (* (:real c1) (:img c2)) (* (:img c1) (:real c2)))})
 
 (defn divide
-  "Multiplies two complex numbers 'c1' and 'c2' given in cartesian representation."
+  "Multiplies two complex numbers `c1` and `c2` given in cartesian representation."
   [c1 c2]
   {:real (/ (+ (* (:real c1) (:real c2)) (* (:img c1) (:img c2)))
-            (+ (m/sqr (:real c2)) (m/sqr (:img c2))))
+            (+ (mc/sqr (:real c2)) (mc/sqr (:img c2))))
    :img  (/ (- (* (:img c1) (:real c2)) (* (:real c1) (:img c2)))
-            (+ (m/sqr (:real c2)) (m/sqr (:img c2))))})
+            (+ (mc/sqr (:real c2)) (mc/sqr (:img c2))))})
 
 (defn scalar-product
-  "Calculates the scalar product of the complex number 'c' with the real number 'x'"
+  "Calculates the scalar product of the complex number `c` with the real number `x`"
   [c x]
   {:real (* x (:real c))
    :img  (* x (:img c))})
 
 (defn sqr
-  "Calculates the square of the complex number 'c' given in cartesian repmresentation."
+  "Calculates the square of the complex number `c` given in cartesian repmresentation."
   [c]
   (multiply c c))
 
 (defn sqrt
-  "Calculates the principal square root of the complex number 'c' given in cartesian representation."
+  "Calculates the principal square root of the complex number `c` given in cartesian representation."
   [c]
   (to-cartesian (sqrt-polar (to-polar c))))
 
 (defn norm
-  "Calculates the norm or absolute value of the complex number 'c' given in cartesian representation."
+  "Calculates the norm or absolute value of the complex number `c` given in cartesian representation."
   [c]
-  (m/sqrt (+ (m/sqr (:real c)) (m/sqr (:img c)))))
+  (m/sqrt (+ (mc/sqr (:real c)) (mc/sqr (:img c)))))
 
 (defn conjugate
-  "Calculates the conjugate of the complex number 'c' given in cartesian representation."
+  "Calculates the conjugate of the complex number `c` given in cartesian representation."
   [c]
   {:real (:real c)
    :img  (* -1 (:img c))})
 
 (defn inverse
-  "Calculates the conjugate of the complex number 'c' given in cartesian representation.
+  "Calculates the conjugate of the complex number `c` given in cartesian representation.
   If c is zero, an exception is thrown."
   [c]
   (scalar-product (conjugate c) (/ 1 (norm c))))

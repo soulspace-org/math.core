@@ -11,7 +11,8 @@
 ;;;;
 
 (ns org.soulspace.math.gradient
-  (:require [org.soulspace.math.core :as m]
+  (:require [clojure.math :as m]
+            [org.soulspace.math.core :as mc]
             [org.soulspace.math.vector :as mv]))
 
 #?(:clj
@@ -86,7 +87,7 @@
 (defn minimize-batch
   "Calculates ."
   ([target-fn gradient-fn theta-0]
-   (minimize-batch target-fn gradient-fn theta-0 m/default-epsilon))
+   (minimize-batch target-fn gradient-fn theta-0 mc/default-epsilon))
   ([target-fn gradient-fn theta-0 tolerance]
    (let [target-fn (safe-fn target-fn)]
      (loop [theta theta-0
@@ -102,7 +103,7 @@
 (defn maximize-batch
   "Calculates the theta that minimizes the target function by gradient descent."
   ([target-fn gradient-fn theta-0]
-   (maximize-batch target-fn gradient-fn theta-0 m/default-epsilon))
+   (maximize-batch target-fn gradient-fn theta-0 mc/default-epsilon))
   ([target-fn gradient-fn theta-0 tolerance]
    (minimize-batch (negated-fn target-fn) (negated-all-fn gradient-fn) theta-0 tolerance)))
 
@@ -150,7 +151,7 @@
 (defn directional-variance-i
   "Calculates the variance of the row x-i in the direction of w."
   [x-i w]
-  (m/sqr (mv/dot-product x-i (direction w))))
+  (mc/sqr (mv/dot-product x-i (direction w))))
 
 (defn directional-variance
   "Calculates the variance of the matrix m in the direction of w."

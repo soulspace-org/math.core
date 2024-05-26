@@ -11,10 +11,8 @@
 ;;;;
 
 (ns org.soulspace.math.methods
-  (:require [org.soulspace.math.core :as m]))
-
-#?(:clj
-   (set! *warn-on-reflection* true))
+  (:require [clojure.math :as m]
+            [org.soulspace.math.core :as mc]))
 
 ;;;
 ;;; Mathemathical algorithms and methods
@@ -25,7 +23,7 @@
 ;;
 
 (defn gcd
-  "Calculates the greatest common divisor of x and y"
+  "Calculates the greatest common divisor of `x` and `y`"
   [x y]
   (if (= y 0)
     x
@@ -43,55 +41,53 @@
 ;;
 ;;
 ;;  
-(defn exp
-  "Calculates the exponential function."
+(defn exp-with-base
+  "Calculates the exponential function of `x` with base `b`."
   [b n]
   (cond
     (= n 0) 1
-    (even? n) (m/sqr (exp b (/ n 2)))
-    :default (* b (exp b (- n 1)))))
+    (even? n) (mc/sqr (exp-with-base b (/ n 2)))
+    :else (* b (exp-with-base b (- n 1)))))
 
 (defn round-up
-  "Rounds a value."
+  "Rounds a value `x`."
   [x n]
-  (/ (m/floor (+ (* x (exp 10 n)) 0.5)) (exp 10 n)))
+  (/ (m/floor (+ (* x (exp-with-base 10 n)) 0.5)) (exp-with-base 10 n)))
 
 (defn close-enough?
-  "Checks for a difference smaller than epsilon"
+  "Checks for a difference of `a` and `b` which is smaller than epsilon"
   ([x y]
-   (close-enough? x y m/default-epsilon))
+   (close-enough? x y mc/default-epsilon))
   ([x y epsilon]
    (< (abs (- x y)) epsilon)))
 
 (defn average-damp
-  "Returns a function with average dampening for the given function."
+  "Returns a function with average dampening for the given function `f`."
   [f]
-  (fn [x] (m/avg x (f x))))
+  (fn [x] (mc/avg x (f x))))
 
 (defn sum
-  "Calculates the sum of term between a and b with the step function nxt."
+  "Calculates the sum of `term` between `a` and `b` with the step function `nxt`."
   [term a nxt b]
-  ; TODO refactor to loop/recur
   (if (> a b)
     0
     (+ (term a)
-       (sum term (nxt a) nxt b))))
+       (recur term (nxt a) nxt b))))
 
 (defn prod
-  "Calculates the product of term between a and b with the step function nxt."
+  "Calculates the product of `term` between `a` and `b` with the step function `nxt`."
   [term a nxt b]
-  ; TODO refactor to loop/recur
   (if (> a b)
     0
     (* (term a)
-       (prod term (nxt a) nxt b))))
+       (recur term (nxt a) nxt b))))
 
 ;;
 ;; 
 ;;
 
 (defn quadratic-roots
-  "Returns the roots of the quadratic equation (a * x^2 + b * x + c = 0)."
+  "Returns the roots of the quadratic equation (`a` * x^2 + `b` * x + `c` = 0)."
   [a b c]
   ; minus is subject to catastrophic cancelling of significant digits in
   ; floating point calculations
@@ -106,43 +102,43 @@
 (defn search-value
   "Searches for value by interval search."
   ([f v low high]
-   (search-value f v low high m/default-epsilon))
+   (search-value f v low high mc/default-epsilon))
   ([f v low high epsilon]
-   (let [mid (m/avg low high)]
+   (let [mid (mc/avg low high)]
      (if (close-enough? low high epsilon)
          mid
          (let [v-test (f mid)]
            (cond
              (> v-test v) (recur f v low mid epsilon)
              (< v-test v) (recur f v mid high epsilon)
-             :default mid))))))
+             :else mid))))))
 
 (defn search-zero
   "Searches for zero by interval search."
   ([f neg-point pos-point]
-   (search-zero f neg-point pos-point m/default-epsilon))
+   (search-zero f neg-point pos-point mc/default-epsilon))
   ([f neg-point pos-point epsilon]
-   (let [midpoint (m/avg neg-point pos-point)]
+   (let [midpoint (mc/avg neg-point pos-point)]
      (if (close-enough? neg-point pos-point epsilon)
          midpoint
          (let [test-value (f midpoint)]
            (cond
              (pos? test-value) (recur f neg-point midpoint epsilon)
              (neg? test-value) (recur f midpoint pos-point epsilon)
-             :default midpoint))))))
+             :else midpoint))))))
 
 (defn half-interval
   "Half interval method for the function f and values a and b."
   ([f a b]
-   (half-interval f a b m/default-epsilon))
+   (half-interval f a b mc/default-epsilon))
   ([f a b epsilon]
    (let [a-value (f a)
          b-value (f b)]
      (cond
        (and (neg? a-value) (pos? b-value)) (search-zero f a b epsilon)
        (and (neg? b-value) (pos? a-value)) (search-zero f b a epsilon)
-       :else (throw (ex-info "The values are not of opposite signs." {:a-value a-value 
-                                                                         :b-value b-value}))))))
+       :else (throw (ex-info "The values are not of opposite signs." {:a-value a-value
+                                                                      :b-value b-value}))))))
 
 (defn fixed-point
   "Calculates a fixed point of the function f."
@@ -156,14 +152,14 @@
 (defn integral
   "Calculates the integral of function f between a and b with dx."
   ([f a b]
-   (integral f a b m/default-dx))
+   (integral f a b mc/default-dx))
   ([f a b dx]
    (* (sum f (+ a (/ dx 2)) (partial + dx) b) dx)))
 
 (defn difference-quotient
   "Calculates the difference quotient of the function f at x with the delta dx."
   ([f x]
-   (difference-quotient f x m/default-dx))
+   (difference-quotient f x mc/default-dx))
   ([f x dx]
    (/ (- (f (+ x dx)) (f x))
       dx)))
@@ -171,7 +167,7 @@
 (defn derivation
   "Returns a funtion that is the derivation of the function f."
   ([f]
-   (derivation f m/default-dx))
+   (derivation f mc/default-dx))
   ([f dx]
    (fn [x]
      ; (difference-quotient f x dx)
@@ -181,7 +177,7 @@
 (defn newton-transform
   "Returns a function which is the newton transfomation of the given function f."
   ([f]
-   (newton-transform f m/default-dx))
+   (newton-transform f mc/default-dx))
   ([f dx]
    (fn [x]
      (- x (/ (f x) ((derivation f dx) x))))))
@@ -189,6 +185,6 @@
 (defn newton-method
   "Newton method for searching a root of the function f starting with guess."
   ([f guess]
-   (newton-method f m/default-dx guess))
+   (newton-method f mc/default-dx guess))
   ([f dx guess]
    (fixed-point (newton-transform f dx) guess)))

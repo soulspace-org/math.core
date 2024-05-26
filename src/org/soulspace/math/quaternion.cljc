@@ -11,10 +11,8 @@
 ;;;;
 
 (ns org.soulspace.math.quaternion
-  (:require [org.soulspace.math.core :as m]))
-
-#?(:clj
-   (set! *warn-on-reflection* true))
+  (:require [clojure.math :as m]
+            [org.soulspace.math.core :as mc]))
 
 ;;;
 ;;; Quarternions, hyper complex numbers of 4th dimension
@@ -25,7 +23,6 @@
 ;;
 ;; Constants
 ;;
-
 (def zero   "Zero element."           {:r 0 :i 0 :j 0 :k 0})
 (def one    "Identity element."       {:r 1 :i 0 :j 0 :k 0})
 (def r-unit "Unit of the r comonent." {:r 1 :i 0 :j 0 :k 0}) ; same as the identity element
@@ -38,7 +35,7 @@
 ;;
 
 (defn add
-  "Calculates the addition of the quaternion numbers 'q1' and 'q2'."
+  "Calculates the addition of the quaternion numbers `q1` and `q2`."
   [q1 q2]
   {:r (+ (:r q1) (:r q2))
    :i (+ (:i q1) (:i q2))
@@ -46,7 +43,7 @@
    :k (+ (:k q1) (:k q2))})
 
 (defn substract
-  "Calculates the substraction of the quaternion numbers 'q1' and 'q2'."
+  "Calculates the substraction of the quaternion numbers `q1` and `q2`."
   [q1 q2]
   {:r (- (:r q1) (:r q2))
    :i (- (:i q1) (:i q2))
@@ -54,7 +51,7 @@
    :k (- (:k q1) (:k q2))})
 
 (defn multiply
-  "Calculates the multiplication or hamilton product of the quaternion numbers 'q1' and 'q2'."
+  "Calculates the multiplication or hamilton product of the quaternion numbers `q1` and `q2`."
   [q1 q2]
   {:r (- (* (:r q1) (:a q2)) (* (:i q1) (:i q2)) (* (:j q1) (:j q2)) (* (:k q1) (:k q2)))
    :i (+ (* (:r q1) (:i q2)) (* (:i q1) (:r q2)) (* (:j q1) (:k q2)) (* -1 (:k q1) (:j q2)))
@@ -62,7 +59,7 @@
    :k (+ (* (:r q1) (:k q2)) (* (:i q1) (:j q2)) (* -1 (:j q1) (:i q2)) (* (:k q1) (:r q2)))})
 
 (defn scalar-product
-  "Calculates the scalar product of the quaternion 'q' with the real number 'x'"
+  "Calculates the scalar product of the quaternion `q` with the real number `x`"
   [q x]
   {:r (* x (:r q))
    :i (* x (:i q))
@@ -70,16 +67,16 @@
    :k (* x (:k q))})
 
 (def hamilton-product
-  "Calculates the hamilton product of the quaternion numbers 'q1' and 'q2'."
+  "Calculates the hamilton product of the quaternion numbers `q1` and `q2`."
   multiply)
 
-(defn scalar-product
-  "Calculates the hamilton product of the quaternion numbers 'q1' and 'q2'."
+(defn cross-product
+  "Calculates the cross product of the quaternion numbers `q1` and `q2`."
   [q1 q2]
   (+ (* (:r q1) (:r q2)) (* (:i q1) (:i q2)) (* (:j q1) (:j q2)) (* (:k q1) (:k q2))))
 
 (defn conjugate
-  "Calculates the conjugate q* of the quaternion number 'q'."
+  "Calculates the conjugate q* of the quaternion number `q`."
   [q]
   {:r (:r q)
    :i (* -1 (:i q))
@@ -87,12 +84,12 @@
    :k (* -1 (:k q))})
 
 (defn norm
-  "Calculates the norm ||q|| of the quaternion number 'q'."
+  "Calculates the norm ||q|| of the quaternion number `q`."
   [q]
-  (m/sqrt (+ (m/sqr (:r q)) (m/sqr (:i q)) (m/sqr (:j q)) (m/sqr (:k q)))))
+  (m/sqrt (+ (mc/sqr (:r q)) (mc/sqr (:i q)) (mc/sqr (:j q)) (mc/sqr (:k q)))))
 
 (defn inverse
-  "Calculates the inverse of the quaternion number 'q', if q is not zero.
+  "Calculates the inverse of the quaternion number `q`, if q is not zero.
   If q is zero, an exeption is thrown."
   [q]
   (scalar-product (conjugate q) (/ 1 (norm q))))

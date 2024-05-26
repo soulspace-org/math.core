@@ -11,26 +11,38 @@
 ;;;;
 
 (ns org.soulspace.math.geometry
-  (:require [org.soulspace.math.core :as m]))
-
-#?(:clj
-   (set! *warn-on-reflection* true))
+  (:require [clojure.math :as m]
+            [org.soulspace.math.core :as mc]))
 
 ;;;
 ;;; Geometric functions
 ;;;
 (defn circle-circumference
-  "Calculates the circumference of the circle with radius r."
-  ^double [^double r]
+  "Calculates the circumference of the circle with radius `r`."
+  ^double [r]
   (* 2 m/PI r))
 
 (defn circle-area
-  "Calculates the area of the circle with radius r."
-  ^double [^double r]
-  (* m/PI (m/sqr r)))
+  "Calculates the area of the circle with radius `r`."
+  ^double [r]
+  (* m/PI (mc/sqr r)))
 
-(defn diagonal
-  "Calculates the diagonal of a rectangle."
+(defn rectangle-circumference
+  "Calculates the circumference of a square with sides `a` or a  rectangle of sides `a` and `b`."
+  ([a]
+   (* 4 a))
+  ([a b]
+   (+ (* 2 a) (* 2 b))))
+
+(defn rectangle-area
+  "Calculates the area of a square with sides `a` or a  rectangle of sides `a` and `b`."
+  ([a]
+   (* a a))
+  ([a b]
+   (* a b)))
+
+(defn rectangle-diagonal
+  "Calculates the diagonal of a square with sides `a` or a rectangle of sides `a` and `b`."
   (^double [a]
    (m/sqrt (* 2 a a)))
   (^double [a b]

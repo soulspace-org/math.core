@@ -11,7 +11,7 @@
 ;;;;
 (ns org.soulspace.math.test.statistics
   (:require [clojure.test :refer :all]
-            [org.soulspace.math.core :as m]
+            [clojure.math :as m]
             [org.soulspace.math.statistics :refer :all]))
 
 (deftest mean-test

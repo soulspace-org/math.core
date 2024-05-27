@@ -12,8 +12,7 @@
 
 (ns org.soulspace.math.types.complex
   "Contains the protocols and implementations for complex numbers."
-  (:require [org.soulspace.math.core :as m]
-            [org.soulspace.math.complex :as mc]))
+  (:require [org.soulspace.math.complex :as mcp]))
 
 ;;;
 ;;; Protocols and Implementations for Complex Numbers
@@ -45,33 +44,33 @@
   [^double real ^double img]
   IComplex
   (add [this c2]
-    (complex (mc/add this c2)))
+    (complex (mcp/add this c2)))
   (substract [this c2]
-    (complex (mc/substract this c2)))
+    (complex (mcp/substract this c2)))
   (multiply [this c2]
-    (complex (mc/multiply this c2)))
+    (complex (mcp/multiply this c2)))
   (divide [this c2]
-    (complex (mc/divide this c2)))
+    (complex (mcp/divide this c2)))
   (scalar-product [this x]
-    (complex (mc/scalar-product this x)))
+    (complex (mcp/scalar-product this x)))
   (sqr [this]
     (multiply this this))
   (sqrt [this]
-    (complex (mc/sqrt this)))
+    (complex (mcp/sqrt this)))
   (norm [this]
-    (mc/norm this))
+    (mcp/norm this))
   (conjugate [this]
-    (complex (mc/conjugate this)))
+    (complex (mcp/conjugate this)))
   (to-polar [this]
-    (polar (mc/to-polar this))))
+    (polar (mcp/to-polar this))))
 
 (defrecord PolarComplex
   [^double r ^double phi]
   IPolarComplex
   (sqrt-polar [this]
-    (polar (mc/sqrt-polar this)))
+    (polar (mcp/sqrt-polar this)))
   (to-cartesian [p]
-    (complex (mc/to-cartesian p))))
+    (complex (mcp/to-cartesian p))))
 
 ;; constructors
 (defn complex

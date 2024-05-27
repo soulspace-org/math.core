@@ -66,21 +66,23 @@
   [f]
   (fn [x] (mc/avg x (f x))))
 
+; TODO refactor to loop
 (defn sum
   "Calculates the sum of `term` between `a` and `b` with the step function `nxt`."
   [term a nxt b]
   (if (> a b)
     0
     (+ (term a)
-       (recur term (nxt a) nxt b))))
+       (sum term (nxt a) nxt b))))
 
+; TODO refactor to loop
 (defn prod
   "Calculates the product of `term` between `a` and `b` with the step function `nxt`."
   [term a nxt b]
   (if (> a b)
     0
     (* (term a)
-       (recur term (nxt a) nxt b))))
+       (prod term (nxt a) nxt b))))
 
 ;;
 ;; 

@@ -9,7 +9,6 @@
 ;;;;
 ;;;;   You must not remove this notice, or any other, from this software.
 ;;;;
-
 (ns org.soulspace.math.geometry
   (:require [clojure.math :as m]
             [org.soulspace.math.core :as mc]))

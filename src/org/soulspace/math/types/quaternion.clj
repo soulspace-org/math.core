@@ -11,8 +11,7 @@
 ;;;;
 
 (ns org.soulspace.math.types.quaternion
-  (:require [org.soulspace.math.core :as m]
-            [org.soulspace.math.quaternion :as q]))
+  (:require [org.soulspace.math.quaternion :as mq]))
 
 ;;;
 ;;; Protocols and Implementations for Quaternion Numbers
@@ -33,15 +32,15 @@
            [r i j k]
   IQuaternion
   (add [this q2]
-    (create-quaternion (add this q2)))
+    (create-quaternion (mq/add this q2)))
   (substract [this q2]
-    (create-quaternion (add this q2)))
+    (create-quaternion (mq/add this q2)))
   (multiply [this q2]
-    (create-quaternion (multiply this q2)))
+    (create-quaternion (mq/multiply this q2)))
   (scalar-product [this x]
-    (create-quaternion (scalar-product this x)))
+    (create-quaternion (mq/scalar-product this x)))
   (conjugate [this]
-    (create-quaternion (conjugate this)))
+    (create-quaternion (mq/conjugate this)))
   (norm [this]
     (norm this)))
 

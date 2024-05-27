@@ -12,16 +12,17 @@
 
 (ns org.soulspace.math.test.geometry
   (:require [clojure.test :refer :all]
-            [org.soulspace.math.core :as m]
+            [clojure.math :as m]
+            [org.soulspace.math.core :as mc]
             [org.soulspace.math.geometry :as mg]))
 
 (deftest circle-circumference-test
   (testing "Testing circle-circumference"
-    (is (= 0.0         (mg/circle-circumference 0)))
-    (is (= m/PI        (mg/circle-circumference 0.5)))
-    (is (= m/DOUBLE-PI (mg/circle-circumference 1)))
-    (is (= (* 4 m/PI)  (mg/circle-circumference 2)))
-    (is (= (* 8 m/PI)  (mg/circle-circumference 4)))))
+    (is (= 0.0          (mg/circle-circumference 0)))
+    (is (= m/PI         (mg/circle-circumference 0.5)))
+    (is (= mc/DOUBLE-PI (mg/circle-circumference 1)))
+    (is (= (* 4 m/PI)   (mg/circle-circumference 2)))
+    (is (= (* 8 m/PI)   (mg/circle-circumference 4)))))
 
 (deftest circle-area-test
   (testing "Testing circle-area"
@@ -33,5 +34,5 @@
 
 (deftest diagonal-test
   (testing "Testing diagonal"
-    (is (= 0.0 (mg/diagonal 0)))
-    (is (= 5.0 (mg/diagonal 3 4)))))
+    (is (= 0.0 (mg/rectangle-diagonal 0)))
+    (is (= 5.0 (mg/rectangle-diagonal 3 4)))))

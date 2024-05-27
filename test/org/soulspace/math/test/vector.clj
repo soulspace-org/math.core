@@ -12,7 +12,8 @@
 
 (ns org.soulspace.math.test.vector
   (:require [clojure.test :refer :all]
-            [org.soulspace.math.core :as m]
+            [clojure.math :as m]
+            [org.soulspace.math.core :as mc]
             [org.soulspace.math.vector :refer :all]))
 
 (deftest add-test
@@ -52,7 +53,7 @@
 (deftest angle-test
   (are [x y] (= x y)
        0.0 (angle [1 0] [1 0])
-       m/HALF-PI (angle [1 0] [0 1])
-       m/HALF-PI (angle [1 0 0 ] [0 1 0 ])
-       m/HALF-PI (angle [1 0 0 0] [0 1 0 0])
+       mc/HALF-PI (angle [1 0] [0 1])
+       mc/HALF-PI (angle [1 0 0 ] [0 1 0 ])
+       mc/HALF-PI (angle [1 0 0 0] [0 1 0 0])
        m/PI (angle [1 0] [-1 0])))

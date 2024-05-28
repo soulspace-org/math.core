@@ -11,8 +11,9 @@
 ;;;;
 
 (ns org.soulspace.math.quaternion
-  (:require [clojure.math :as m]
-            [org.soulspace.math.core :as mc]))
+  (:require [org.soulspace.math.core :as mc]))
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 ;;;
 ;;; Quarternions, hyper complex numbers of 4th dimension

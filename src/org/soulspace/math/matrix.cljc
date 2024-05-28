@@ -12,7 +12,6 @@
 
 (ns org.soulspace.math.matrix)
 
-
 ;;;
 ;;; Matrix functions
 ;;;

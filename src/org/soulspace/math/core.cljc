@@ -9,11 +9,9 @@
 ;;;;
 ;;;;   You must not remove this notice, or any other, from this software.
 ;;;;
-
-#?(:clj (ns org.soulspace.math.core
-          (:require [clojure.math :as m]))
-   :cljs (ns org.soulspace.math.core
-           (:require [cljs.math :as m])))
+(ns org.soulspace.math.core)
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 (def default-epsilon "Default tolerance (epsilon)." 0.00001)
 (def default-dx "Default step size (delta x)." 0.0000001)

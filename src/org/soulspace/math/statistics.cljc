@@ -11,12 +11,10 @@
 ;;;;
 
 (ns org.soulspace.math.statistics
-  (:require [clojure.math :as m]
-            [org.soulspace.math.core :as mc]
+  (:require [org.soulspace.math.core :as mc]
             [org.soulspace.math.matrix :as mm]))
-
-#?(:clj
-   (set! *warn-on-reflection* true))
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 ;;;
 ;;; Statistics functions

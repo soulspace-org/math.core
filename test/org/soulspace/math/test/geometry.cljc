@@ -12,9 +12,10 @@
 
 (ns org.soulspace.math.test.geometry
   (:require [clojure.test :refer :all]
-            [clojure.math :as m]
             [org.soulspace.math.core :as mc]
             [org.soulspace.math.geometry :as mg]))
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 (deftest circle-circumference-test
   (testing "Testing circle-circumference"

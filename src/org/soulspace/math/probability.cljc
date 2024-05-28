@@ -11,9 +11,10 @@
 ;;;;
 
 (ns org.soulspace.math.probability
-  (:require [clojure.math :as m]
-            [org.soulspace.math.core :as mc]
+  (:require [org.soulspace.math.core :as mc]
             [org.soulspace.math.methods :as mm]))
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 ;;;
 ;;; Probability functions

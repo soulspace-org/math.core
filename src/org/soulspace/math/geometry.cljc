@@ -10,8 +10,9 @@
 ;;;;   You must not remove this notice, or any other, from this software.
 ;;;;
 (ns org.soulspace.math.geometry
-  (:require [clojure.math :as m]
-            [org.soulspace.math.core :as mc]))
+  (:require [org.soulspace.math.core :as mc]))
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 ;;;
 ;;; Geometric functions

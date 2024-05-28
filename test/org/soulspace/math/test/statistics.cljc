@@ -11,8 +11,9 @@
 ;;;;
 (ns org.soulspace.math.test.statistics
   (:require [clojure.test :refer :all]
-            [clojure.math :as m]
             [org.soulspace.math.statistics :refer :all]))
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 (deftest mean-test
   (is (== (mean [3 3 3 3 3]) 3))

@@ -10,9 +10,9 @@
 ;;;;   You must not remove this notice, or any other, from this software.
 ;;;;
 
-(ns org.soulspace.math.vector
-  (:require [clojure.math :as m]
-            [org.soulspace.math.core :as mc]))
+(ns org.soulspace.math.vector)
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 ;;;
 ;;; Vector functions

@@ -11,9 +11,10 @@
 ;;;;
 
 (ns org.soulspace.math.octonion
-  (:require [clojure.math :as m]
-            [org.soulspace.math.core :as mc]
+  (:require [org.soulspace.math.core :as mc]
             [org.soulspace.math.quaternion :as mq]))
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 ;;;
 ;;; Octonions, hyper complex numbers of the 8th dimension

@@ -12,9 +12,10 @@
 
 (ns org.soulspace.math.test.vector
   (:require [clojure.test :refer :all]
-            [clojure.math :as m]
             [org.soulspace.math.core :as mc]
             [org.soulspace.math.vector :refer :all]))
+#?(:clj  (require '[clojure.math :as m])
+   :cljs (require '[cljs.math :as m]))
 
 (deftest add-test
   (are [x y] (= x y)
@@ -34,9 +35,11 @@
        [0 3 0] (add [0 1 0] [0 1 0] [0 1 0])
        [3 3 3 3 3] (add [1 1 1 1 1] [1 1 1 1 1] [1 1 1 1 1])))
 
+#?(:clj
 (deftest add-exception-test
   (is (thrown? Exception (add [1] [0 1])))
   (is (thrown? Exception (add [1 0 0 0] [0 1 0]))))
+)
 
 (deftest cross-product-test
   (are [x y] (= x y)
@@ -46,9 +49,11 @@
        [0 0 1] (cross-product [1 0 0] [0 1 0])
        [-1 0 0] (cross-product [0 0 1] [0 1 0])))
 
+#?(:clj
 (deftest cross-product-exception-test
   (is (thrown? Exception (cross-product [1 0] [0 1])))
   (is (thrown? Exception (cross-product [1 0 0 0] [0 1 0 0]))))
+)
 
 (deftest angle-test
   (are [x y] (= x y)

@@ -17,9 +17,6 @@
 ;;;
 ;;; Protocols and Implementations for Vectors
 ;;;
-
-(set! *warn-on-reflection* true)
-
 (declare vector)
 
 (defprotocol IVector
